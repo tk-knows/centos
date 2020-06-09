@@ -11,7 +11,7 @@ RUN yum install -y net-tools telnet \
     epel-release
 
 RUN yum install -y sshuttle \
-    expect 
+    expect sshpass
 
 # COPY config/index.html /var/www/html/index.html
 # COPY config/customhttpd.conf /etc/httpd/conf/httpd.conf
@@ -28,12 +28,15 @@ EXPOSE 8080
 
 USER nsoadmin
 WORKDIR /home/nsoadmin
-COPY --chown=nsoadmin:nsoadmin shuttle_start.sh shuttle_start.sh
-COPY --chown=nsoadmin:nsoadmin httpserver_start.sh  httpserver_start.sh
-COPY --chown=nsoadmin:nsoadmin runas_daemon.sh runas_daemon.sh
+
+RUN  mkdir -p /tmp/ssh
 RUN  mkdir .ssh
 COPY --chown=nsoadmin:nsoadmin config/sshconfigfile .ssh/config
-RUN  chmod +x shuttle_start.sh
+COPY --chown=nsoadmin:nsoadmin sh-run.sh sh-run.sh
+COPY --chown=nsoadmin:nsoadmin httpserver_start.sh  httpserver_start.sh
+COPY --chown=nsoadmin:nsoadmin runas_daemon.sh runas_daemon.sh
+
+RUN  chmod +x sh-run.sh
 RUN  chmod +x httpserver_start.sh
 RUN  chmod +x runas_daemon.sh
 RUN  ssh-keygen -q -t rsa -N '' -f /home/nsoadmin/.ssh/id_rsa 2>/dev/null <<< y >/dev/null
