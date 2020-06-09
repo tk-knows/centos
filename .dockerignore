@@ -1,4 +1,5 @@
 # ignore .git and .cache folders
+# credit: https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/
 .git
 .cache
 
