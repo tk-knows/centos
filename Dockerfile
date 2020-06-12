@@ -35,9 +35,9 @@ WORKDIR /home/nsoadmin
 RUN  mkdir .ssh
 COPY --chown=nsoadmin:nsoadmin config/sshconfigfile .ssh/config
 
-COPY --chown=nsoadmin:nsoadmin sh-run.sh sh-run.sh
-COPY --chown=nsoadmin:nsoadmin httpserver_start.sh  httpserver_start.sh
-COPY --chown=nsoadmin:nsoadmin runas_daemon.sh runas_daemon.sh
+COPY --chown=nsoadmin:nsoadmin test-cmds/sh-run.sh sh-run.sh
+COPY --chown=nsoadmin:nsoadmin test-cmds/httpserver_start.sh  httpserver_start.sh
+COPY --chown=nsoadmin:nsoadmin test-cmds/runas_daemon.sh runas_daemon.sh
 
 RUN  chmod +x sh-run.sh
 RUN  chmod +x httpserver_start.sh

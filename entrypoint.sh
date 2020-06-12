@@ -5,9 +5,9 @@
 onexit() {
   echo '=> Terminating process by signal (SIGINT, SIGTERM, SIGKILL, EXIT)'
   pkill -9 sshuttle ssh sshpass
-  sudo iptables --flush
+  iptables --flush
   sleep 2
-  sudo iptables --flush
+  iptables --flush
   sleep 1
   echo '=> Bye!'
   exit 0
@@ -24,9 +24,9 @@ fi
 
 mkdir -p /tmp/ssh
 
-x=0
+loopcnt=0
 if [ "$1" = "" ]; then
-  while [ $x -le 2 ]
+  while [ $loopcnt -le 10 ]
   do
     echo "=> Setting up sshuttle connection to the ${SSH_USERNAME}@${SSH_HOST}:${SSH_PORT}"
 
@@ -38,11 +38,11 @@ if [ "$1" = "" ]; then
         ${SSHUTTLE_NETWORKS}
     echo "=> SSH link down or sshuttle connection failed!"
     echo "=> Wait 5 seconds to reconnect"
-    sudo iptables --flush
+    iptables --flush
     sleep 5
-    sudo iptables --flush
+    iptables --flush
     echo "=> Reconnecting..."
-    loopcnt++
+    $loopcnt++
   done
 else
   exec "$@"
