@@ -49,5 +49,5 @@ RUN  sudo chmod 600 /home/nsoadmin/.ssh/config
 
 
 COPY --chown=nsoadmin:nsoadmin entrypoint.sh entrypoint.sh
-RUN  chmod +x      entrypoint.sh
+RUN  chmod 777      entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]

@@ -1,2 +1,4 @@
 **/*.class
 centos8
+*.pid
+pod-centos8.yaml

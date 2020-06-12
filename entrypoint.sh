@@ -24,8 +24,9 @@ fi
 
 mkdir -p /tmp/ssh
 
+x=0
 if [ "$1" = "" ]; then
-  while true
+  while [ $x -le 2 ]
   do
     echo "=> Setting up sshuttle connection to the ${SSH_USERNAME}@${SSH_HOST}:${SSH_PORT}"
 
@@ -41,6 +42,7 @@ if [ "$1" = "" ]; then
     sleep 5
     sudo iptables --flush
     echo "=> Reconnecting..."
+    loopcnt++
   done
 else
   exec "$@"
