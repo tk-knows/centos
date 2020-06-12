@@ -42,7 +42,7 @@ if [ "$1" = "" ]; then
     sleep 5
     iptables --flush
     echo "=> Reconnecting..."
-    $loopcnt++
+    loopcnt=$(( $loopcnt + 1 ))
   done
 else
   exec "$@"

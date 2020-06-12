@@ -7,7 +7,6 @@ FROM amd64/centos:latest
 
 RUN yum install -y net-tools telnet \
     sudo \
-    vim \
     epel-release
 
 RUN yum install -y sshuttle \
@@ -18,7 +17,9 @@ ENV SSH_PASSWORD     VIRL
 ENV SSH_HOST         10.81.59.228
 ENV SSH_PORT         22
 ENV SSH_OPTIONS      ''
+# ENV SSHUTTLE_OPTIONS '-N --dns '
 ENV SSHUTTLE_OPTIONS '-N --dns --disable-ipv6'
+
 ENV SSHUTTLE_EXTRA_OPTIONS  ''
 
 ENV SSHUTTLE_NETWORKS 172.16.1.0/24
@@ -44,7 +45,7 @@ RUN  chmod +x httpserver_start.sh
 RUN  chmod +x runas_daemon.sh
 # RUN  ssh-keygen -q -t rsa -N '' -f /home/nsoadmin/.ssh/id_rsa 2>/dev/null <<< y >/dev/null
 
-RUN  sudo chmod 600 /home/nsoadmin/.ssh/config
+RUN  chmod 600 /home/nsoadmin/.ssh/config
 # CMD  ./runas_daemon.sh
 
 
